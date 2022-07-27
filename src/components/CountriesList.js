@@ -15,7 +15,7 @@ function CountriesList({ countryData}){
             {countryData.map(country => {
                
                return (
-                <Link 
+                <Link key={country.alpha3Code} 
                     className="list-group-item list-group-item-action"
                     to={ "/" + country.alpha3Code}>
                    

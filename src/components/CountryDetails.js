@@ -9,20 +9,20 @@ function CountryDetails({ countryData }){
 
     const { countryCode } = useParams();
 
-    useEffect(() => {
-       const foundCountry =  countryData.find(element => {
-        return element.alpha3Code === countryCode;
-            })
-            setCountryDetails(foundCountry)
+    // useEffect(() => {
+    //    const foundCountry =  countryData.find(element => {
+    //     return element.alpha3Code === countryCode;
+    //         })
+    //         setCountryDetails(foundCountry)
     
-    }, [ countryCode, countryData ])
+    // }, [ countryCode, countryData ])
 
     useEffect(() => {
         fetch(`https://ih-countries-api.herokuapp.com/countries/${countryCode}`)
         .then(res => res.json())
         .then(json => setCountryDetails(json))
         .catch(err => console.log(err))
-    })
+    },[ countryCode ])
     
 
     return(
@@ -64,8 +64,8 @@ function CountryDetails({ countryData }){
                 <ul>
                 {countryDetails.borders.map(alpha3Code => {
                     return (
-                        <li>
-                            <Link to={"/" + alpha3Code}>{alpha3Code}</Link>
+                        <li key={alpha3Code}>
+                            <Link  to={"/" + alpha3Code}>{alpha3Code}</Link>
                         </li>
                 )
                     
